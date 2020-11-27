@@ -2,7 +2,6 @@ import React, { useState, useCallback, useEffect } from 'react';
 
 import TodoItem from '../TodoItem';
 
-import mock from '../../mock/todo';
 
 import * as S from './styels';
 
@@ -17,25 +16,11 @@ const TodoList: React.FC = () => {
       title: 'teste1',
       done: false
     },
-    {
-      title: 'teste2',
-      done: true
-    },
-    {
-      title: 'teste3',
-      done: false
-    },
-    {
-      title: 'teste4',
-      done: false
-    },
   ]);
   const [todo, setTodo] = useState<Todo>({} as Todo);
 
 
-  // console.log('estado', state)
-
-  const checkTodoItem = (index: number) => {
+  const checkTodoItem = useCallback((index: number) => {
     const newState = todoList.map((item, idx) => {
       if (index === idx) {
         return {
@@ -49,12 +34,16 @@ const TodoList: React.FC = () => {
     setTodoList([
       ...newState,
     ]);
-  }
+  }, []);
 
-  const handleSubmit = (todo: Todo): void => {
-    console.log('foi ?')
+  const handleSubmit = useCallback((todo: Todo): void => {
     setTodoList([...todoList, todo])
-  }
+  }, []);
+
+
+  useEffect(() => {
+    alert('oi, estou sendo executado, antes do componente se montar!');
+  }, []);
 
   return (
     <S.Container>

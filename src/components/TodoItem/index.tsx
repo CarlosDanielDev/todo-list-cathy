@@ -2,11 +2,6 @@ import React from 'react';
 
 import * as S from './styles';
 
-interface Todo {
-  title: string;
-  done: boolean;
-}
-
 interface TodoProps {
   title: string;
   done: boolean;

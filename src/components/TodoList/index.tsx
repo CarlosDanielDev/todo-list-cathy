@@ -2,7 +2,6 @@ import React, { useState, useCallback, useEffect } from 'react';
 
 import TodoItem from '../TodoItem';
 
-
 import * as S from './styels';
 
 interface Todo {
@@ -13,14 +12,24 @@ interface Todo {
 const TodoList: React.FC = () => {
   const [todoList, setTodoList] = useState<Todo[]>([
     {
-      title: 'teste1',
+      title: 'Função para apagar',
+      done: true
+    },
+    {
+      title: 'Deixar mais bonito',
+      done: false
+    },
+    {
+      title: 'Local Storage',
       done: false
     },
   ]);
   const [todo, setTodo] = useState<Todo>({} as Todo);
 
 
-  const checkTodoItem = useCallback((index: number) => {
+  // console.log('estado', state)
+
+  const checkTodoItem = (index: number) => {
     const newState = todoList.map((item, idx) => {
       if (index === idx) {
         return {
@@ -34,34 +43,44 @@ const TodoList: React.FC = () => {
     setTodoList([
       ...newState,
     ]);
-  }, []);
+  }
 
-  const handleSubmit = useCallback((todo: Todo): void => {
+  const handleSubmit = (todo: Todo): void => {
+    console.log('foi ?')
     setTodoList([...todoList, todo])
-  }, []);
+  }
 
-
-  useEffect(() => {
-    alert('oi, estou sendo executado, antes do componente se montar!');
-  }, []);
+  const deleteTodo = (index: number): void => {
+    const newState: Todo[] = [...todoList];
+    newState.splice(index, 1);
+    setTodoList([
+      ...newState,
+    ]);
+  }
 
   return (
     <S.Container>
       <h1>To-Do</h1>
+      <div>
+        <input className="newTodo"
+          type="text"
+          placeholder="Novo Todo"
+          onChange={(event) => setTodo({ title: event.target.value, done: false })}
+        />
+        <button type="submit" onClick={() => handleSubmit(todo)}>
+          Ok
+        </button>
+      </div>
       <ul>
         {todoList.map((todo, index) => (
-          <TodoItem title={todo.title} index={index} handleCheck={checkTodoItem} done={todo.done} key={String(index)} />
+          <TodoItem title={todo.title} 
+          index={index} 
+          handleCheck={checkTodoItem}
+          handleRemove={deleteTodo}
+          done={todo.done} 
+          key={String(index)} />
         ))}
       </ul>
-      <input
-        type="text"
-        placeholder="Novo Todo"
-        onChange={(event) => setTodo({ title: event.target.value, done: false })}
-      />
-      <button type="submit" onClick={() => handleSubmit(todo)}>
-        Add new Todo
-      </button>
-
     </S.Container>
   );
 }

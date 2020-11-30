@@ -1,18 +1,14 @@
 export default [
   {
-    title: 'teste1',
-    done: false
-  },
-  {
-    title: 'teste1',
+    title: 'Função para apagar',
     done: true
   },
   {
-    title: 'teste1',
+    title: 'Deixar mais bonito',
     done: false
   },
   {
-    title: 'teste1',
+    title: 'Local Storage',
     done: false
   },
 ]

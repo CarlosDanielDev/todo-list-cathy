@@ -8,18 +8,27 @@ interface LabelProps {
 
 export const ListItem = styled.li<LabelProps>`
   font-size: 20px;
-  padding: 5px 0;
+  margin: 8px 0;
+  width: 40vw;
+  text-align: left;
   
   span {
     display: flex;
     align-items: center;
+    background: linear-gradient(
+      90deg,
+      rgba(76, 26, 162, 1) 0%,
+      rgba(66, 36, 250, 1) 100%
+    );
+    padding: 10px;
+    border-radius: 4px;
 
     label {
       ${({ done }) => done && css`
         text-decoration: line-through;
         color: #ccc;
       `}
-      color: #808080;
+      color: #bdc1c6;
     }
 
     input[type="checkbox"] {
@@ -42,7 +51,7 @@ export const ListItem = styled.li<LabelProps>`
         left: 4px;
         bottom: 4px;
         width: 8px;
-        height: 14px;
+        height: 12px;
         border-style: solid;
         border-color: #fff;
         border-width: 0 2px 2px 0;
@@ -56,6 +65,23 @@ export const ListItem = styled.li<LabelProps>`
         &::before {
           opacity: 1;
         }
+      }
+    }
+
+    span {
+      position: absolute;
+      right: 30%;
+      background: none;
+      cursor: pointer;
+    }
+  }
+
+  @media screen and (max-width: 900px) {
+    width: 50vw;
+
+    span {
+      span {
+        right: 25%
       }
     }
   }

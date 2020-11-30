@@ -19,9 +19,9 @@ export default createGlobalStyle`
     height: 100%;
   }
 
-
   h1 {
     color: #ccc;
     font-weight: bold;
+    line-height: 80px;
   }
 `;
